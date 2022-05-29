@@ -37,16 +37,24 @@ const response = artblocks.projects()
 ```javascript
 Promise {
   [
-    { id: 0, name: 'Chromie Squiggle' },
-    { id: 1, name: 'Genesis' },
-    { id: 2, name: 'Construction Token' },
-    { id: 3, name: 'Cryptoblots' },
-    { id: 4, name: 'Dynamic Slices' },
-    { id: 5, name: 'Variant Plan' },
-    { id: 6, name: 'View Card' },
-    { id: 7, name: 'Elevated Deconstructions' },
-    { id: 8, name: 'Singularity' },
-    { id: 9, name: 'Ignition' },
+{
+    id: 0,
+    name: "Chromie Squiggle",
+    artist: "Snowfro",
+    contract: "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a",
+  },
+  {
+    id: 1,
+    name: "Genesis",
+    artist: "DCA",
+    contract: "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a",
+  },
+  {
+    id: 2,
+    name: "Construction Token",
+    artist: "Jeff Davis",
+    contract: "0x059edd72cd353df5106d2b9cc5ab83a52287ac3a",
+  },
     ...
    ]
 }
@@ -83,7 +91,7 @@ Promise {
 ### Project Script
 
 ```javascript
-const response = artblocks.project_script(0)
+const response = artblocks.project_script(1000001)
 ```
 
 ```javascript
@@ -92,7 +100,7 @@ Promise {
     id: 0,
     name: 'Chromie Squiggle',
     last_updated: '1620363885',
-    ependency: 'p5js',
+    dependency: 'p5js',
     dependency_version: '1.0.0',
     dependency_url: '"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"',
     interactive: 'true',
@@ -113,17 +121,17 @@ Promise {
 ### Token Metadata
 
 ```javascript
-const response = artblocks.token_metadata(0)
+const response = artblocks.token_metadata(1000001)
 ```
 
 ```javascript
 Promise {
   {
-    project_id: 0,
-    project_name: 'Chromie Squiggle',
-    token_id: 0,
-    token_invocation: 0,
-    token_hash: '0x722899b10c66da3b72fb60a8e71df442ee1c004547ba2227d76bed357469b4ea'
+    project_id: 1,
+    project_name: 'Genesis',
+    token_id: 1000001,
+    token_invocation: 1,
+    token_hash: '0xcfaa8630f0b48b6ed9bdbf9f486ba9e023ee168a2e0370cbac0e09196b33d12b'
   }
 }
 ```
@@ -137,24 +145,21 @@ const response = artblocks.token_script(0)
 ```javascript
 Promise {
   {
-    token_id: 0,
+    token_id: 1000001,
     token_invocation: 0,
     token_dependencies: {
       dependency: 'p5js',
       dependency_version: '1.0.0',
       dependency_url: '"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"'
     },
-    token_data: 'let tokenData = {"hashes":["0x722899b10c66da3b72fb60a8e71df442ee1c004547ba2227d76bed357469b4ea"], "tokenId":"0"}',
-    token_script: 'let numHashes = tokenData.hashes.length;\n' +
-      'let hashPairs = [];\n' +
-      'for (let i = 0; i < numHashes; i++) {\n' +
-      '     for (let j = 0; j < 32; j++) {\n' +
-      '          hashPairs.push(tokenData.hashes[i].slice(2 + (j * 2), 4 + (j * 2)));\n' +
-      '     }\n' +
-      '}\n' +
+    token_data: 'let tokenData = {"hashes":['0xcfaa8630f0b48b6ed9bdbf9f486ba9e023ee168a2e0370cbac0e09196b33d12b'], "tokenId":"1000001"}',
+    token_script: 'tokenData = tokenData.hashes[0].substring(2);' +
+      'int[] hp = new int[32];' +
+      'void setup() {' +
+      '  size(window.innerWidth>window.innerHeight*4/3?window.innerHeight*4/3:window.innerWidth, window.innerWidth>window.innerHeight*4/3?window.innerHeight:window.innerWidth*3/4);' +
+      '  for (int i = 0; i < 32; i = i + 1) {' +
+      '    hp[i] = unhex(tokenData.substring(i + i, i + i + 2));' +
       ...
-  }
-}
 ```
 
 ### Token Generator

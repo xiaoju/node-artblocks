@@ -129,8 +129,8 @@ Promise {
   {
     project_id: 1,
     project_name: 'Genesis',
-    token_id: 1000001,
-    token_invocation: 1,
+    token_id: 1000002,
+    token_invocation: 2,
     token_hash: '0xcfaa8630f0b48b6ed9bdbf9f486ba9e023ee168a2e0370cbac0e09196b33d12b'
   }
 }

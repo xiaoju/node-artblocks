@@ -121,7 +121,7 @@ Promise {
 ### Token Metadata
 
 ```javascript
-const response = artblocks.token_metadata(1000001)
+const response = artblocks.token_metadata(1000002)
 ```
 
 ```javascript
